@@ -1,19 +1,19 @@
 # Pong in 91 lines of code.
 
 
-Player Instructions: 
+**Player Instructions:**
 
 p1 controls:
 
-&nbsp;w = move up
+&#9;w = move up
   
-&nbsp;s = move down
+&#9;s = move down
   
 p2 controls:
 
-&nbsp;up arrow = move up
+&#9;up arrow = move up
   
-&nbsp;down arrow = move down
+&#9;down arrow = move down
 
 
 **Play here**: https://erbemirbe.github.io/Pong-in-91-lines/
