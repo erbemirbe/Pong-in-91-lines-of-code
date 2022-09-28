@@ -1,0 +1,91 @@
+<canvas id='screen' width='500' height="300"></canvas><script type="text/javascript">
+(()=>{
+const canvas = document.getElementById('screen')
+const ctx = canvas.getContext('2d')
+ctx.font = "bold 48px arial";
+ctx.textAlign = 'center'
+var paddle = {width:10, height:50, speedX:0, speedY:3}
+var ball =	 {width:10, height:10}
+var text = {offsetX: 20, offsetY: 48}
+var rules = {
+	startY: .5 * canvas.height,
+	startX: [0, canvas.width-paddle.width, .5*canvas.width - .5*ball.width, .5*canvas.width-text.offsetX, .5*canvas.width+text.offsetX],
+	backgroundColor: "black",
+	foregroundColor: "white"
+}
+var players = [{score: 0},{score: 0}]
+var entities
+function PrepareGame(){
+	for(let i in players) {
+		Object.assign(players[i], {x: rules.startX[i], y: rules.startY, directionX:0, directionY:0, type: paddle})
+	}
+	Object.assign(ball, {
+		x: rules.startX[2],
+		y: rules.startY,
+		speedX: 2,
+		speedY: 1,
+		directionX: Math.random() > .5 ? 1 : -1,
+		directionY: Math.random() > .5 ? 1 : -1,
+		type: ball
+	})
+	entities =[...players, ball]
+	ctx.fillStyle = rules.backgroundColor
+	ctx.fillRect(0,0,canvas.width,canvas.height)
+	ctx.fillStyle = rules.foregroundColor
+	for (var i = 0; i < players.length; i++) {
+		ctx.fillText(players[i].score,rules.startX[3+i], text.offsetY)
+	}
+}
+document.addEventListener('keydown', (e) => {
+	if (e.repeat) return
+	switch(e.key){
+		case 'w': players[0].directionY = -1; break
+		case 's': players[0].directionY = 1; break
+		case 'ArrowUp': players[1].directionY = -1; break
+		case 'ArrowDown': players[1].directionY = 1
+	}
+})
+document.addEventListener('keyup', (e) => {
+	if (e.repeat) return
+	switch(e.key){
+		case 'w': players[0].directionY = 0; break
+		case 's': players[0].directionY = 0; break
+		case 'ArrowUp': players[1].directionY = 0; break
+		case 'ArrowDown': players[1].directionY = 0
+	}
+ })
+function Update(){
+	ball.type.speedX += .001
+	for(let p of entities){
+		ctx.fillStyle = rules.backgroundColor
+		ctx.fillRect(Math.round(p.x), Math.round(p.y), p.type.width, p.type.height)
+		p.y += p.type.speedY * p.directionY
+		p.x += p.type.speedX * p.directionX
+		if(p.y < 0) p.y = 0
+		else if(p.y + p.type.height > canvas.height) p.y = canvas.height-p.type.height
+		ctx.fillStyle = rules.foregroundColor
+		ctx.fillRect(Math.round(p.x), Math.round(p.y), p.type.width, p.type.height)
+	}
+	if(ball.x < 0) {win(players[1]); return}
+	else if(ball.x > canvas.width-ball.type.width) {win(players[0]); return}
+	if(ball.x < players[0].x + players[0].type.width 
+	&& ball.y > players[0].y
+	&& ball.y < players[0].y+players[0].type.height)
+		ball.directionX = 1
+	if(ball.x + ball.type.width > players[1].x 
+	&& ball.y > players[1].y
+	&& ball.y < players[1].y+players[1].type.height)
+		ball.directionX = -1
+	if(ball.y <= 0 || ball.y + ball.type.height >= canvas.height)
+		ball.directionY *= -1
+	window.requestAnimationFrame(Update)
+}
+function win(player){
+	player.score++
+	PrepareGame()
+	window.requestAnimationFrame(Update)
+}
+PrepareGame()
+window.requestAnimationFrame(Update)
+})()
+</script>
