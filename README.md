@@ -1,6 +1,4 @@
-# Pong-in-91-lines
-
-Implementation of a Pong game in 91 lines of code.
+# Implementation of a Pong game in 91 lines of code.
 
 
 Player Instructions: 
