@@ -1,9 +1,6 @@
 # Pong in 91 lines of code.
 
-
-**Player Instructions:**
-
-Keyboard controls:
+**Keyboard controls:**
 
 Player 1: W = Move Up, S = Move Down
   
