@@ -1,8 +1,9 @@
 # Pong-in-91-lines
 
-Play here: https://erbemirbe.github.io/Pong-in-91-lines/
+Implementation of a Pong game in 91 lines of code.
 
-Instructions: 
+
+Player Instructions: 
 
 p1 controls:
 
@@ -15,3 +16,6 @@ p2 controls:
   up arrow = move up
   
   down arrow = move down
+
+
+**Play here**: https://erbemirbe.github.io/Pong-in-91-lines/
