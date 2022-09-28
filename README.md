@@ -3,17 +3,19 @@
 
 **Player Instructions:**
 
-p1 controls:
+Keyboard controls:
 
-&#9;w = move up
-  
-&#9;s = move down
-  
-p2 controls:
+Player 1:
 
-&#9;up arrow = move up
+&#9;W = Move Up
   
-&#9;down arrow = move down
+&#9;S = Move Down
+  
+Player 2:
+
+&#9;Up Arrow = Move Up
+  
+&#9;Down Arrow = Move Down
 
 
 **Play here**: https://erbemirbe.github.io/Pong-in-91-lines/
